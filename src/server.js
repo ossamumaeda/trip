@@ -7,6 +7,8 @@ import {createActivity} from "./routes/create-activity"
 import {createLink} from "./routes/create-links"
 import {getActivities} from "./routes/get-activities"
 import {getLinks} from "./routes/list-links"
+import {getParticipants} from "./routes/get-participants"
+import {createInvite} from "./routes/create-invite"
 import { serializerCompiler, validatorCompiler, ZodTypeProvider } from "fastify-type-provider-zod";
 const app = fastify();
 
@@ -29,3 +31,5 @@ app.register(createActivity)
 app.register(createLink)
 app.register(getActivities)
 app.register(getLinks)
+app.register(getParticipants)
+app.register(createInvite)
