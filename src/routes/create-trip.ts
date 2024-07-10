@@ -2,13 +2,10 @@ import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from "zod"
 import { prisma } from "../lib/prisma";
-import dayjs from "dayjs";
+
 import { getEmailClient } from "../lib/mail";
 import nodemailer from 'nodemailer';
-import localizedFormat from 'dayjs/plugin/localizedformat';
-import 'dayjs/locale/pt-br'
-dayjs.locale('pt-br')
-dayjs.extend(localizedFormat)
+import { dayjs } from "../lib/dayjs";
 
 export async function createTrip(app: FastifyInstance) {
     app.withTypeProvider<ZodTypeProvider>().post('/trips', {
@@ -20,11 +17,12 @@ export async function createTrip(app: FastifyInstance) {
                 owner_name: z.string(),
                 owner_email: z.string().email(),
                 emails_to_invite: z.array(z.string().email())
+                
             })
         }
     }, async (request) => {
         const { destination, ends_at, starts_at, owner_email, owner_name, emails_to_invite } = request.body
-
+        console.log(request.body)
         //Validacoes de data
         if (dayjs(starts_at).isBefore(new Date())) {
             throw new Error('Invalid trip start date')
