@@ -14,9 +14,10 @@ import {getTrip} from "./routes/get-trip"
 import {updateTrip} from "./routes/update-trip"
 import { serializerCompiler, validatorCompiler, ZodTypeProvider } from "fastify-type-provider-zod";
 import {errorHandler} from "./error-handler"
+import { env } from "./env" 
 const app = fastify();
 
-const __PORT__ = '3000';
+const __PORT__ = env.PORT
 
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);

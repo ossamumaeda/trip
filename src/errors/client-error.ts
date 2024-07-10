@@ -1,0 +1,1 @@
+export class ClientError extends Error{} // Criacao de uma classe generica de erro
